@@ -91,12 +91,79 @@ formulario.addEventListener('submit', function (e) {
 
     // Si todo es válido, pasamos al siguiente paso (Guardar datos)
     if (formularioValido) {
-        console.log("¡Validación exitosa! Listo para guardar en LocalStorage.");
-        // Aquí llamaremos a la función de guardado en el próximo paso
+        console.log("¡Validación exitosa! Guardando en LocalStorage...");
 
-        // Opcional: limpiar el formulario tras el éxito
-        // formulario.reset();
-    } else {
-        console.log("Hay errores en el formulario.");
+        // Creamos un objeto con los datos ingresados
+        const nuevoScore = {
+            jugador: inputJugador.value,
+            puntos: parseInt(inputPuntos.value),
+            nivel: selectNivel.value
+        };
+
+        // Lo agregamos a nuestro arreglo
+        scoresGuardados.push(nuevoScore);
+
+        // Guardamos el arreglo actualizado en LocalStorage (Persistencia)
+        localStorage.setItem('arcadeScores', JSON.stringify(scoresGuardados));
+
+        // Generamos los elementos dinámicamente en el DOM
+        renderizarScores();
+
+        // Limpiamos el formulario para un nuevo ingreso
+        formulario.reset();
+
+        // Devolvemos el foco al primer input para mayor usabilidad
+        inputJugador.focus();
     }
 });
+
+// =========================================
+// 4. LOCALSTORAGE Y GENERACIÓN DINÁMICA
+// =========================================
+
+// Capturamos el contenedor <ul> donde iran las puntuaciones
+const listaPuntuaciones = document.getElementById('listaPuntuaciones');
+
+// Recuperar datos de LocalStorage al iniciar (o crear un arreglo vacío si no hay datos)
+let scoresGuardados = JSON.parse(localStorage.getItem('arcadeScores')) || [];
+
+// Función para pintar los datos en el DOM
+function renderizarScores() {
+    // Limpiamos la lista antes de volver a generarla para que no se dupliquen
+    listaPuntuaciones.innerHTML = '';
+
+    scoresGuardados.forEach((score, index) => {
+        // 1. Crear el elemento <li> (Generación dinámica)
+        const li = document.createElement('li');
+
+        // 2. Crear un span para el texto
+        const texto = document.createElement('span');
+        texto.textContent = `[NIVEL ${score.nivel}] ${score.jugador} - ${score.puntos} PTS`;
+
+        // 3. Crear el botón de eliminar
+        const btnEliminar = document.createElement('button');
+        btnEliminar.textContent = 'BORRAR';
+        btnEliminar.classList.add('btn-eliminar');
+
+        // 4. Evento para eliminar el elemento
+        btnEliminar.addEventListener('click', function () {
+            // Eliminar del arreglo en memoria
+            scoresGuardados.splice(index, 1);
+            // Actualizar el LocalStorage con el nuevo arreglo
+            localStorage.setItem('arcadeScores', JSON.stringify(scoresGuardados));
+            // Eliminar elemento del DOM
+            li.remove();
+
+            // Re-renderizamos para actualizar los índices
+            renderizarScores();
+        });
+
+        // 5. Ensamblar los elementos (append)
+        li.appendChild(texto);
+        li.appendChild(btnEliminar);
+        listaPuntuaciones.appendChild(li);
+    });
+}
+
+// Renderizar inmediatamente al cargar la página
+document.addEventListener('DOMContentLoaded', renderizarScores);
