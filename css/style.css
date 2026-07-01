@@ -1,0 +1,190 @@
+/* =========================================
+   VARIABLES Y RESETEO BÁSICO
+   ========================================= */
+:root {
+    --bg-dark: #0a0a1a;
+    --vaus-blue: #00ffff;
+    --vaus-silver: #a0a0a0;
+    --block-red: #ff3333;
+    --text-main: #ffffff;
+    --font-arcade: 'Courier New', Courier, monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-arcade);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* =========================================
+   JERARQUÍA VISUAL Y ENCABEZADOS
+   ========================================= */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 3px solid var(--vaus-blue);
+    padding-bottom: 1rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    color: var(--vaus-blue);
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px var(--vaus-blue);
+    margin-bottom: 0.5rem;
+}
+
+h2,
+h3 {
+    color: var(--vaus-silver);
+    letter-spacing: 2px;
+}
+
+/* =========================================
+   CONTENEDORES Y ESTRUCTURA
+   ========================================= */
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.panel-registro,
+.panel-resultados {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--vaus-silver);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: inset 0 0 15px rgba(160, 160, 160, 0.2);
+}
+
+/* =========================================
+   FORMULARIO Y ESTADOS
+   ========================================= */
+.grupo-input {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: var(--vaus-blue);
+}
+
+input,
+select {
+    padding: 0.8rem;
+    background-color: #000;
+    border: 1px solid var(--vaus-silver);
+    color: var(--text-main);
+    font-family: var(--font-arcade);
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--vaus-blue);
+    box-shadow: 0 0 8px var(--vaus-blue);
+}
+
+button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--vaus-blue);
+    color: #000;
+    font-family: var(--font-arcade);
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--text-main);
+    box-shadow: 0 0 15px var(--vaus-blue);
+}
+
+/* =========================================
+   FEEDBACK VISUAL DE ERRORES (Obligatorio)
+   ========================================= */
+.input-error {
+    border: 2px solid var(--block-red) !important;
+    box-shadow: 0 0 8px var(--block-red) !important;
+}
+
+.msg-error {
+    color: var(--block-red);
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+    min-height: 1.2em;
+    /* Evita que la pantalla salte cuando aparece el texto */
+    display: block;
+}
+
+/* =========================================
+   LISTA DE RESULTADOS (Generación Dinámica)
+   ========================================= */
+.lista-arcade {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.lista-arcade li {
+    background-color: #000;
+    border: 1px dashed var(--vaus-blue);
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-eliminar {
+    background-color: var(--block-red);
+    color: white;
+    width: auto;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-eliminar:hover {
+    background-color: white;
+    color: var(--block-red);
+    box-shadow: 0 0 10px var(--block-red);
+}
+
+/* =========================================
+   COMPATIBILIDAD (Responsive Básico)
+   ========================================= */
+@media (min-width: 768px) {
+    .contenedor-principal {
+        flex-direction: row;
+        max-width: 1000px;
+    }
+
+    .panel-registro,
+    .panel-resultados {
+        flex: 1;
+    }
+}
