@@ -19,7 +19,6 @@ Desarrollar una mini-aplicación web interactiva temática de arcade retro para 
 3. No requiere instalación de dependencias ni servidores locales.
 
 ## 📸 Evidencias (Capturas)
-*(Nota: Arrastra aquí 2 o 3 pantallazos de tu app funcionando: una del inicio, otra mostrando los errores de validación en rojo, y otra con datos cargados en la lista)*.
 <img width="1094" height="808" alt="image" src="https://github.com/user-attachments/assets/1e4bd289-825f-4ca6-a631-045c1f6c4099" />
 
 <img width="1077" height="761" alt="image" src="https://github.com/user-attachments/assets/c3c15137-27f2-48f3-ba30-f9a5fa5aceb8" />
